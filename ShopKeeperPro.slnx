@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/ShopKeeperPro.Core/ShopKeeperPro.Core.csproj" />
+    <Project Path="src/ShopKeeperPro.WinForms/ShopKeeperPro.WinForms.csproj" />
+  </Folder>
+</Solution>
