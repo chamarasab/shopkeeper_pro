@@ -31,9 +31,15 @@ public class MainForm : Form
     // Current State
     private User _currentUser = new() { Username = "chax", Name = "Chamara", Role = "Administrator" };
     private bool _isFullScreen = false;
+    public bool WantsSignOut { get; private set; } = false;
 
-    public MainForm()
+    public MainForm(User? initialUser = null)
     {
+        if (initialUser != null)
+        {
+            _currentUser = initialUser;
+        }
+
         _scannerService = new BarcodeScannerService(_soundPlayer);
 
         DoubleBuffered = true;
@@ -334,13 +340,18 @@ public class MainForm : Form
 
     private void PromptSignOut()
     {
-        using var login = new LoginDialog();
-        if (login.ShowDialog() == DialogResult.OK && login.AuthenticatedUser != null)
+        var confirm = MessageBox.Show(
+            $"Are you sure you want to sign out from the current register, {_currentUser.Name}?",
+            "Sign Out — ShopKeeper Pro",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question,
+            MessageBoxDefaultButton.Button2
+        );
+
+        if (confirm == DialogResult.Yes)
         {
-            _currentUser = login.AuthenticatedUser;
-            _lblUserBadge.Text = $"👤 {_currentUser.Name} ({_currentUser.Role})";
-            _posBillingView.CurrentCashier = _currentUser.Name;
-            _stockInView.CurrentUser = _currentUser.Name;
+            WantsSignOut = true;
+            Close();
         }
     }
 

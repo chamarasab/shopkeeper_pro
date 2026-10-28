@@ -14,6 +14,20 @@ Built natively with **C# and .NET 10 Windows Forms**, ShopKeeper Pro features cu
 
 ## 📸 System Walkthrough & User Manual
 
+### 0. Cashier Authentication & Shift Sign In
+Upon launching ShopKeeper Pro, cashiers and administrators are presented with a secure, hardware-rounded Windows 11 dark mode authentication screen. It connects asynchronously to SQL Server, verifies latency, and provides single-click operator switching.
+
+![Cashier Authentication](docs/screenshots/00_login_authentication.png)
+
+#### Authentication Features:
+- **Live Database Status Pill:** Shows real-time MSSQL health check and ping latency (e.g., `🟢 MSSQL: ONLINE (19ms)`).
+- **Quick Operator Pills:** One-click cashier/shift selector (`Chamara (Admin)`, `Alex (Cashier)`, `System Admin`) for rapid station handover.
+- **Password Visibility Toggle:** Built-in `[👁]` eye toggle button to show/hide typed credentials.
+- **Inline Alert Banner:** Displays inline error states without blocking the interface.
+- **Secure Register Sign Out:** Clicking the `SIGN OUT` button on the top navigation bar prompts for confirmation, securely closes the POS session, locks the register, and smoothly returns to the authentication screen for the next operator.
+
+---
+
 ### 1. POS Billing & High-Speed Checkout Screen
 The cashier workflow is built for zero-friction operation. Cashiers can operate entirely via barcode scanner, keyboard hotkeys (`F1`–`F6`), or touch/mouse clicks on the fast-catalog product grid.
 
@@ -238,3 +252,4 @@ RESULTS: 15 PASSED, 0 FAILED
 
 ## 📄 License
 This project is licensed under the MIT License. Designed and developed by **Chamara**.
+

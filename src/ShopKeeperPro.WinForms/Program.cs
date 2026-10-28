@@ -35,7 +35,29 @@ internal static class Program
             }
         }
 
-        Application.Run(new MainForm());
+        // Multi-session Cashier Authentication Loop
+        while (true)
+        {
+            using var login = new LoginDialog();
+            var loginResult = login.ShowDialog();
+
+            if (loginResult != DialogResult.OK || login.AuthenticatedUser == null)
+            {
+                // User clicked [ESC] EXIT or closed the login window -> terminate application cleanly
+                break;
+            }
+
+            using var mainForm = new MainForm(login.AuthenticatedUser);
+            Application.Run(mainForm);
+
+            if (!mainForm.WantsSignOut)
+            {
+                // User closed the main window directly via [X] -> exit
+                break;
+            }
+            // User signed out -> loop restarts and presents LoginDialog for next cashier
+        }
+
         return 0;
     }
 }
